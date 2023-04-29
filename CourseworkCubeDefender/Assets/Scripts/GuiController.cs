@@ -55,7 +55,7 @@ public class GuiController : MonoBehaviour
     {
         if (timerRect)
         {
-            float val = Mathf.Clamp(timerProgress, 0, 1);
+            float val = Mathf.Clamp(timerProgress, 0, 1); 
             timerRect.localScale = new Vector3(val, timerRect.localScale.y, timerRect.localScale.z);
         }
     }
