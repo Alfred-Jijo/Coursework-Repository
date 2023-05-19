@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Unity private variables SearlizeFields allow  editing in engine
     [SerializeField] private GameObject head = null;
     [SerializeField] private float maxVelocity = 0;
     [SerializeField] private float jumpForce = 0;
@@ -194,7 +195,7 @@ public class PlayerController : MonoBehaviour
         if (buildPrefabs.Length <= 0) return;
 
         int newBuildPrefab = currentBuildPrefab;
-
+        
         if (up)
         {
             newBuildPrefab++;
