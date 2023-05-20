@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
     private bool canJump = true;
 
+
     // Start is called before the first frame update
     void Start()
     {
