@@ -1,0 +1,215 @@
+==> AnimationDestroyOnExit.cs <==
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AnimationDestroyOnExit : StateMachineBehaviour
+{
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Destroy(animator.gameObject.transform.parent.gameObject, stateInfo.length);
+    }
+}
+
+==> Buildable.cs <==
+
+public class Buildable : MonoBehaviour
+{
+    [SerializeField] private int price = 0;
+
+    public int getPrice()
+    {
+        return price;
+    }
+}
+
+==> CreditPickup.cs <==
+    public int getValue()
+    {
+        return value;
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+}
+
+==> DamageController.cs <==
+        GameOverOnDeath go = GetComponent<GameOverOnDeath>();
+
+        if (go)
+        {
+            go.TriggerGameOver();
+        }
+
+        //Destroy(gameObject);
+    }
+}
+
+==> GameOverOnDeath.cs <==
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class GameOverOnDeath : MonoBehaviour
+{
+    public void TriggerGameOver()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+}
+
+==> GuiController.cs <==
+
+    public void UpdateTimer(float timerProgress)
+    {
+        if (timerRect)
+        {
+            float val = Mathf.Clamp(timerProgress, 0, 1); 
+            timerRect.localScale = new Vector3(val, timerRect.localScale.y, timerRect.localScale.z);
+        }
+    }
+}
+
+==> HealthBarController.cs <==
+            healhtBar.transform.localScale = new Vector3((float) currentValue / maxValue, healhtBar.transform.localScale.y, healhtBar.transform.localScale.z);
+        }
+
+        if (text)
+        {
+            string prefix = (renderGameObjectName && gameObjectName != "") ? (gameObjectName + ": ") : "";
+            text.text = prefix + Mathf.RoundToInt(currentValue) + "/" + Mathf.RoundToInt(maxValue);
+        }
+    }
+}
+
+==> MeleeAttacker.cs <==
+            canAttack = false;
+            Invoke("ResetCanAttack", coolDown);
+        }
+    }
+
+    private void ResetCanAttack()
+    {
+        canAttack = true;
+    }
+}
+
+==> MiniMap.cs <==
+            miniMapCamera.rect = new Rect(x, y, width, height);
+        }
+    }
+
+    // Update is called once per frame
+    /* void Update()
+    {
+        
+    */
+}
+
+==> MoveAtConstantSpeed.cs <==
+    {
+        transform.Translate(speed * Time.deltaTime);
+        distanceTravelled += speed.magnitude * Time.deltaTime;
+
+        if (maxTavelDistance > 0 && distanceTravelled > maxTavelDistance)
+        {
+            Destroy(gameObject);
+        }
+    }
+}
+
+==> PlayerController.cs <==
+    private void AddCredits(int amount)
+    {
+        credits += amount;
+
+        if (guiController)
+        {
+            guiController.UpdateCreditsText(credits);
+        }
+    }
+}
+
+==> ProjectileDamageController.cs <==
+
+            if (damageController)
+            {
+                damageController.DealDamage(damage);
+            }
+        }
+
+        Destroy(gameObject);
+    }
+}
+
+==> ProjectileEmitter.cs <==
+            projectileDamageController.SetSpawningGameObjectId(gameObject.GetInstanceID());
+        }
+    }
+
+    private IEnumerator weaponCooldown()
+    {
+        yield return new WaitForSeconds(delay);
+        canFire = true;
+    }
+}
+
+==> RotateAtConstantSpeed.cs <==
+{
+    [SerializeField] private Vector3 rotationSpeed = Vector3.zero;
+    [SerializeField] private bool worldSpace = true;
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Rotate(rotationSpeed * Time.deltaTime, worldSpace ? Space.World : Space.Self);
+    }
+}
+
+==> SpawnManager.cs <==
+        int numZombiesRandomized = Random.Range(numZombiesStatic - numZombiesRandomRange, numZombiesStatic + numZombiesRandomRange);
+        int numZombiesToSpawn = numZombiesRandomized >= 1 ? numZombiesRandomized : 1;
+
+        for (int i = 0; i < numZombiesToSpawn; i++)
+        {
+            int idx = Random.Range(0, zombieSpawners.Length);
+            zombieSpawners[idx].Spawn();
+        }
+    }
+}
+
+==> TurretController.cs <==
+            if (gun)
+            {
+                Vector3 gunPos = transform.position + 2 * transform.up;
+                Vector3 dir = (currentTarget.transform.position - gunPos).normalized;
+
+                gun.PullTrigger(projectile, gunPos + dir, Quaternion.LookRotation(dir));
+            }
+        }
+    }
+}
+
+==> ZombieController.cs <==
+        Vector3 targetDir = target.transform.position - transform.position;
+        transform.forward = targetDir;
+
+        if (rb)
+        {
+            Vector3 hVelocity = new Vector3(targetDir.x, 0, targetDir.z).normalized * speed;
+            rb.velocity = hVelocity + rb.velocity.y * Vector3.up;
+        }
+    }
+}
+
+==> ZombieSpawner.cs <==
+
+    public void Spawn()
+    {
+        float distance = maxSpawnRange > 1 ? Random.Range(1, maxSpawnRange) : 1;
+        float angle = Random.Range(0, 360);
+        Vector3 pos = transform.position + Vector3.up + Quaternion.Euler(0, angle, 0) * Vector3.forward * distance;
+
+        Instantiate(zombie, pos, zombie.transform.rotation);
+    }
+}
