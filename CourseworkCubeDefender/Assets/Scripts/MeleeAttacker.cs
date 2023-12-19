@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeleeAttacker : MonoBehaviour
 {
-    [SerializeField] private float strength = 0;
+    [SerializeField] private float strength = 5;
     [SerializeField] private float coolDown = 0;
 
     private bool canAttack = true;

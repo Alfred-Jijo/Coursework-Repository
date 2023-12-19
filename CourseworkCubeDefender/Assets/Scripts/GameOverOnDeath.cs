@@ -7,6 +7,6 @@ public class GameOverOnDeath : MonoBehaviour
 {
     public void TriggerGameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(0);
     }
 }
