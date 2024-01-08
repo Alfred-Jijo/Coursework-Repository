@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameOverOnDeath : MonoBehaviour
 {
+    private GuiController gui;
+
     public void TriggerGameOver()
     {
-        SceneManager.LoadScene(0);
+        //Debug.Log(gui.scoreAmount);
+        SceneManager.LoadScene(2);
     }
 }

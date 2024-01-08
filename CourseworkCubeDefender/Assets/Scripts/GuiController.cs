@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GuiController : MonoBehaviour
 {
     private Text selectedBuildText = null;
     private Text creditsText = null;
     private RectTransform timerRect = null;
+    public float scoreAmount;
+    public float scoreIncrement;
+    public TextMeshProUGUI score;
 
     // Start is called before the first frame update
     void Start()
     {
+        scoreAmount = 0f;
+        scoreIncrement = 1f;
         GameObject selectedBuild = GameObject.Find("Selected Build");
 
         if (selectedBuild)
@@ -32,6 +38,12 @@ public class GuiController : MonoBehaviour
         {
             timerRect = timer.GetComponent<RectTransform>();
         }
+    }
+
+    void Update()
+    {
+        score.text = " Score:" + (int)scoreAmount;
+        scoreAmount += scoreIncrement * Time.deltaTime;
     }
 
     public void UpdateSelectedBuildText(string name, int price)
