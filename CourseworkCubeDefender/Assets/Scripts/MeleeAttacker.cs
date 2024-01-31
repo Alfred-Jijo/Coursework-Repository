@@ -9,6 +9,7 @@ public class MeleeAttacker : MonoBehaviour
 
     private bool canAttack = true;
     private Animator animator;
+    private DamageController damageController;
 
     void Start()
     {

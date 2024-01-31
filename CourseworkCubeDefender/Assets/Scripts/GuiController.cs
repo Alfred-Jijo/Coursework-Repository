@@ -12,6 +12,7 @@ public class GuiController : MonoBehaviour
     public float scoreAmount;
     public float scoreIncrement;
     public TextMeshProUGUI score;
+    private GameOverOnDeath gameOverScript;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,11 @@ public class GuiController : MonoBehaviour
     {
         score.text = " Score:" + (int)scoreAmount;
         scoreAmount += scoreIncrement * Time.deltaTime;
+
+        if (gameOverScript != null)
+        {
+            gameOverScript.UpdateFinalScore(scoreAmount);
+        }
     }
 
     public void UpdateSelectedBuildText(string name, int price)
