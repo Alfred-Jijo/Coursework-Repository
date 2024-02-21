@@ -6,8 +6,8 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private int daySeconds = 0;
 
-    [SerializeField] private int numZombiesPerWaveIncrement = 0;
-    [SerializeField] private int numZombiesRandomRange = 0;
+    [SerializeField] private int numZombiesPerWaveIncrement = 5;
+    [SerializeField] private int numZombiesRandomRange = 5;
 
     GuiController guiController = null;
 
