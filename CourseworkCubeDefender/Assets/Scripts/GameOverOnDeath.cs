@@ -1,24 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameOverOnDeath : MonoBehaviour
 {
-    public TextMeshProUGUI finalScoreText;
-
-    private float finalScore;
-
-    public void UpdateFinalScore(float score)
-    {
-        finalScore = score;
-    }
+    public TextMeshProUGUI FinalScore;
+    public GuiController gui;
+    public float score;
+    public Text FinalScoreAmountText;
 
 
     public void TriggerGameOver()
     {
-        //finalScoreText.text = "Final Score: " + Mathf.RoundToInt(finalScore).ToString();
+        GameObject FinalScoreAmount = GameObject.Find("FinalScoreAmount");
+        // score = gui.scoreAmount;
         SceneManager.LoadScene(2);
+        // FinalScore.text = "Final Score: " + score.ToString();
+        //FinalScore.text = "Final " + gui.score.text;
+        if (FinalScoreAmount)
+        {
+            FinalScoreAmountText = FinalScoreAmount.GetComponent<Text>();
+        }
+        // FinalScore.text = "Final Score:" + (int)gui.finalScore;
+
+        UpdateFinalScoreAmount();
+    }
+
+    public void UpdateFinalScoreAmount()
+    {
+        string scoreProp = $" Final Score: {gui.scoreAmount}";
+        FinalScoreAmountText.text = scoreProp;
     }
 }

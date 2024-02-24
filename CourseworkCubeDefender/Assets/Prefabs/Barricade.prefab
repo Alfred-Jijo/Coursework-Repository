@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fa404b048e1024f9f729df13d5a94e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 0
+  initialHealth: 5
   spawnOnDeathPrefab: {fileID: 0}
   spawnOnDeathPrefabCount: 0
   healthBarController: {fileID: 5027163992571882800}
